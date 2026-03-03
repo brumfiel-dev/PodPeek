@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PodPeek — Political Podcast Keyword Monitor</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <span class="logo">PodPeek</span>
+      <span class="tagline">Political Podcast Keyword Monitor</span>
+    </div>
+    <span class="last-updated" id="last-updated"></span>
+  </header>
+
+  <section class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-label">Total Mentions</div>
+      <div class="stat-value" id="stat-total">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Last 24 Hours</div>
+      <div class="stat-value" id="stat-today">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Podcasts Tracked</div>
+      <div class="stat-value" id="stat-podcasts">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Trending Keyword</div>
+      <div class="stat-value accent" id="stat-trending">&mdash;</div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <input type="text" id="filter-search" placeholder="Search episodes, keywords...">
+    <select id="filter-keyword"></select>
+    <select id="filter-podcast"></select>
+    <select id="filter-category"></select>
+    <select id="filter-date">
+      <option value="7">Last 7 days</option>
+      <option value="14">Last 14 days</option>
+      <option value="30" selected>Last 30 days</option>
+    </select>
+    <button class="btn-reset" id="filter-reset">Reset</button>
+  </div>
+
+  <div id="loading" class="loading">
+    <div class="loading-spinner"></div>
+    <div>Loading scan results&hellip;</div>
+  </div>
+
+  <main class="results-grid" id="results-grid"></main>
+
+  <footer class="footer">
+    PodPeek scans every 6 hours via GitHub Actions. Data rolls off after 30 days.
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
