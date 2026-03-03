@@ -69,7 +69,11 @@ def fetch_google_sheet(sheet_id, gid="0"):
     resp = requests.get(url, timeout=30)
     resp.raise_for_status()
     reader = csv.DictReader(io.StringIO(resp.text))
-    return list(reader)
+    # Normalize headers to lowercase so sheet column casing doesn't matter
+    rows = []
+    for row in reader:
+        rows.append({k.lower().strip(): v for k, v in row.items()})
+    return rows
 
 
 def fetch_channel_videos(channel_id):
@@ -284,7 +288,7 @@ def main():
 
     for podcast in active_podcasts:
         channel_id = podcast.get("channel_id", "").strip()
-        podcast_name = podcast.get("name", "").strip()
+        podcast_name = (podcast.get("name") or podcast.get("podpeek") or "").strip()
         if not channel_id:
             log.warning("Skipping podcast with no channel_id: %s", podcast_name)
             continue
